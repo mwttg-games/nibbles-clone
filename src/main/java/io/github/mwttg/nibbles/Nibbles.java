@@ -1,0 +1,32 @@
+package io.github.mwttg.nibbles;
+
+import io.github.mwttg.pixelartillery2d.cleanup.CleanUp;
+import io.github.mwttg.pixelartillery2d.graphic.GameWindow;
+import io.github.mwttg.pixelartillery2d.graphic.OpenGlConfiguration;
+import io.github.mwttg.pixelartillery2d.sound.SoundDevice;
+import io.github.mwttg.pixelartillery2d.sound.SoundListener;
+
+public class Nibbles {
+
+  public static void main(final String[] args) {
+    SoundDevice.initialize();
+    SoundListener.setGain(0.1f);
+
+    final long windowId = GameWindow.create(openGlConfiguration());
+    final GameLoop gameLoop = new GameLoop();
+    gameLoop.execute(windowId);
+
+    CleanUp.purge();
+  }
+
+  public static OpenGlConfiguration openGlConfiguration() {
+    return new OpenGlConfiguration(
+        "Nibbles",
+        Constants.WIDTH,
+        Constants.HEIGHT,
+        true,
+        true,
+        Constants.NEAR_PLANE,
+        Constants.FAR_PLANE);
+  }
+}
