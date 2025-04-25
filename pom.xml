@@ -29,11 +29,6 @@
             <version>${logback-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
             <groupId>io.github.mwttg</groupId>
             <artifactId>pixel-artillery-2d</artifactId>
             <version>${pixelartillery.version}</version>
