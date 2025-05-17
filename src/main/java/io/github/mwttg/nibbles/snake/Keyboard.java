@@ -1,35 +1,38 @@
 package io.github.mwttg.nibbles.snake;
 
+import io.github.mwttg.nibbles.entity.snake.Direction;
 import org.lwjgl.glfw.GLFW;
 
-public class Keyboard {
+public final class Keyboard {
 
-  private Direction direction;
+  private Direction previous;
 
-  public Keyboard() {
-    this.direction = Direction.UP;
+  private Keyboard() {
+    this.previous = Direction.LEFT;
   }
 
-  // TODO: BUG! if snake is moving UP and you press fast enough(e.g.) LEFT and then DOWN snake turn
-  // 180 degree
+  public static Keyboard initialize() {
+    return new Keyboard();
+  }
+
   public Direction getDirection(final long windowId) {
-    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_UP) == GLFW.GLFW_PRESS
-        && direction != Direction.DOWN) {
-      direction = Direction.UP;
+    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_UP) == GLFW.GLFW_PRESS) {
+      previous = Direction.UP;
+      return Direction.UP;
     }
-    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_DOWN) == GLFW.GLFW_PRESS
-        && direction != Direction.UP) {
-      direction = Direction.DOWN;
+    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_DOWN) == GLFW.GLFW_PRESS) {
+      previous = Direction.DOWN;
+      return Direction.DOWN;
     }
-    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_LEFT) == GLFW.GLFW_PRESS
-        && direction != Direction.RIGHT) {
-      direction = Direction.LEFT;
+    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_LEFT) == GLFW.GLFW_PRESS) {
+      previous = Direction.LEFT;
+      return Direction.LEFT;
     }
-    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_RIGHT) == GLFW.GLFW_PRESS
-        && direction != Direction.LEFT) {
-      direction = Direction.RIGHT;
+    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_RIGHT) == GLFW.GLFW_PRESS) {
+      previous = Direction.RIGHT;
+      return Direction.RIGHT;
     }
 
-    return direction;
+    return previous;
   }
 }
