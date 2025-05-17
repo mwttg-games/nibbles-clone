@@ -33,6 +33,8 @@ public class MoveDownState extends AbstractSnakeMoveState implements SnakeState 
       return stateManager.getGrowState();
     } else if (doesHeadHitsWall(snake, levelEntity)) {
       return stateManager.getDieState();
+    } else if (snake.doesBitOwnTail()) {
+      return stateManager.getDieState();
     } else if (direction == Direction.LEFT) {
       return stateManager.getMoveLeft();
     } else if (direction == Direction.RIGHT) {

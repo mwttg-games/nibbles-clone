@@ -3,7 +3,7 @@ package io.github.mwttg.nibbles;
 import io.github.mwttg.nibbles.entity.LevelEntity;
 import io.github.mwttg.nibbles.entity.SnakeEntity;
 import io.github.mwttg.nibbles.entity.snake.Direction;
-import io.github.mwttg.nibbles.snake.Keyboard;
+import io.github.mwttg.nibbles.utilities.Keyboard;
 import io.github.mwttg.nibbles.utilities.Assets;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL41;

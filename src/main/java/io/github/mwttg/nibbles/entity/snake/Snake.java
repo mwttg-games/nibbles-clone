@@ -9,8 +9,9 @@ import org.joml.Matrix4f;
 public record Snake(Position head, List<Position> tail) {
 
   public static Snake initialize(final int x, final int y) {
-    final Position position = new Position(x, y);
-    return new Snake(position, List.of(position));
+    final Position head = new Position(x, y);
+    final Position tail = new Position(x + 1, y);
+    return new Snake(head, List.of(tail));
   }
 
   public int getNormalizedX() {
@@ -58,5 +59,9 @@ public record Snake(Position head, List<Position> tail) {
 
   public List<Matrix4f> getTailTransforms() {
     return tail.stream().map(tail -> tail.getTransform(Constants.SNAKE_Z_LAYER)).toList();
+  }
+
+  public boolean doesBitOwnTail() {
+    return tail.contains(head);
   }
 }

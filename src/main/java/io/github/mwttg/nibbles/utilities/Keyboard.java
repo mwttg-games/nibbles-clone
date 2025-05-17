@@ -1,4 +1,4 @@
-package io.github.mwttg.nibbles.snake;
+package io.github.mwttg.nibbles.utilities;
 
 import io.github.mwttg.nibbles.entity.snake.Direction;
 import org.lwjgl.glfw.GLFW;
