@@ -13,6 +13,14 @@ public record Snake(Position head, List<Position> tail) {
     return new Snake(position, List.of(position));
   }
 
+  public int getNormalizedX() {
+    return (int) head.x();
+  }
+
+  public int getNormalizedY() {
+    return (int) head.y();
+  }
+
   public Snake move(final Direction direction) {
     final List<Position> newTail = moveTail();
     final Position newHead = moveHead(direction);

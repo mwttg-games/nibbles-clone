@@ -31,6 +31,8 @@ public class MoveUpState extends AbstractSnakeMoveState implements SnakeState {
       final SnakeStateManager stateManager) {
     if (doesHeadHitsApple(snake, levelEntity)) {
       return stateManager.getGrowState();
+    } else if (doesHeadHitsWall(snake, levelEntity)) {
+      return stateManager.getDieState();
     } else if (direction == Direction.LEFT) {
       return stateManager.getMoveLeft();
     } else if (direction == Direction.RIGHT) {

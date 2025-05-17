@@ -22,7 +22,13 @@ public record Level(Set<Position> walls, Set<Position> apples) {
 
   private static Set<Position> initializeWalls() {
     LOG.info("   Initialize Walls ...");
-    return new HashSet<>();
+
+    Set<Position> result = new HashSet<>();
+    for (int i = 12; i < 55; i++ ) {
+      final Position position = new Position(i, 17);
+      result.add(position);
+    }
+    return result;
   }
 
   private static Set<Position> initializeApples(final Set<Position> walls) {

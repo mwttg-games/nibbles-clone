@@ -38,6 +38,19 @@ public abstract class AbstractSnakeMoveState {
   }
 
   protected boolean doesHeadHitsWall(final Snake snake, final LevelEntity levelEntity) {
+    if (snake.getNormalizedX() == Constants.MIN_X - 1) { // left Level border
+      return true;
+    }
+    if (snake.getNormalizedX() == Constants.MAX_X) { // right Level border
+      return true;
+    }
+    if (snake.getNormalizedY() == Constants.MIN_Y - 1) { // bottom Level border
+      return true;
+    }
+    if (snake.getNormalizedY() == Constants.MAX_Y) { // top Level border
+      return true;
+    }
+
     return levelEntity.getLevel().isWallAtPosition(snake.head());
   }
 }

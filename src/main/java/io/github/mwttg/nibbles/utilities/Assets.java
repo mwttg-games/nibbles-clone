@@ -22,6 +22,7 @@ public class Assets {
 
   private final Sound soundMove;
   private final Sound soundEat;
+  private final Sound soundDead;
 
   private final int shaderId;
   private final Uniform uniform;
@@ -49,6 +50,7 @@ public class Assets {
 
     this.soundMove = Sound.create("./data/sounds/move.wav");
     this.soundEat = Sound.create("./data/sounds/eat.wav");
+    this.soundDead = Sound.create("./data/sounds/dead.wav");
   }
 
   public static Assets getInstance() {
@@ -113,5 +115,9 @@ public class Assets {
 
   public Sound getSoundEat() {
     return soundEat;
+  }
+
+  public Sound getSoundDead() {
+    return soundDead;
   }
 }

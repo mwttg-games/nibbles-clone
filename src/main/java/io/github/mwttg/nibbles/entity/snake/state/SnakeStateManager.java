@@ -13,7 +13,9 @@ public class SnakeStateManager {
   private final MoveDownState moveDown;
   private final MoveLeftState moveLeft;
   private final MoveRightState moveRight;
+
   private final GrowState growState;
+  private final DieState dieState;
 
   private SnakeState previousState;
   private SnakeState currentState;
@@ -26,12 +28,14 @@ public class SnakeStateManager {
       final MoveDownState moveDown,
       final MoveLeftState moveLeft,
       final MoveRightState moveRight,
-      final GrowState growState) {
+      final GrowState growState,
+      final DieState dieState) {
     this.moveUp = moveUp;
     this.moveDown = moveDown;
     this.moveLeft = moveLeft;
     this.moveRight = moveRight;
     this.growState = growState;
+    this.dieState = dieState;
     this.previousState = moveLeft;
     this.currentState = moveLeft;
     this.timer = Timer.initialize();
@@ -44,7 +48,8 @@ public class SnakeStateManager {
         new MoveDownState(),
         new MoveLeftState(),
         new MoveRightState(),
-        new GrowState());
+        new GrowState(),
+        new DieState());
   }
 
   public void draw(final Snake snake) {
@@ -96,6 +101,10 @@ public class SnakeStateManager {
 
   public GrowState getGrowState() {
     return growState;
+  }
+
+  public DieState getDieState() {
+    return dieState;
   }
 
   public SnakeState getPreviousState() {

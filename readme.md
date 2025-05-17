@@ -17,6 +17,18 @@ If you want to play the original Nibbles, you can try the following link:
 | OpenGL | 4.1     |
 | OpenAL | 1.1     |
 
+## Controls 
+
+### Keyboard
+
+| Key         | Action              |
+|-------------|---------------------|
+| ESC         | Quit Game           |
+| UP-Arrow    | Set direction UP    |
+| DOWN-Arrow  | Set direction DOWN  |
+| LEFT-Arrow  | Set direction LEFT  |
+| RIGHT-Arrow | Set direction RIGHT |
+
 ## Links
 
 * https://github.com/tangentstorm/tangentlabs/blob/master/qbasic/NIBBLES.BAS
