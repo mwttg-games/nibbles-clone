@@ -43,6 +43,11 @@ public record Level(Set<Position> walls, Set<Position> apples) {
     return result;
   }
 
+  public boolean isWallAtPosition(final Position position) {
+    final Position normalizedPosition = removeFraction(position);
+    return walls.contains(normalizedPosition);
+  }
+
   public boolean isAppleAtPosition(final Position position) {
     final Position normalizedPosition = removeFraction(position);
     return apples.contains(normalizedPosition);

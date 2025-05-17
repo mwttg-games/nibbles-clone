@@ -1,5 +1,6 @@
 package io.github.mwttg.nibbles.entity.snake.state;
 
+import io.github.mwttg.nibbles.entity.LevelEntity;
 import io.github.mwttg.nibbles.entity.snake.Direction;
 import io.github.mwttg.nibbles.entity.snake.Snake;
 import io.github.mwttg.nibbles.utilities.Assets;
@@ -24,8 +25,13 @@ public class MoveLeftState extends AbstractSnakeMoveState implements SnakeState 
 
   @Override
   public SnakeState handleStateTransition(
-      final Snake snake, final Direction direction, final SnakeStateManager stateManager) {
-    if (direction == Direction.UP) {
+      final Snake snake,
+      final Direction direction,
+      final LevelEntity levelEntity,
+      final SnakeStateManager stateManager) {
+    if (doesHeadHitsApple(snake, levelEntity)) {
+      return stateManager.getGrowState();
+    } else if (direction == Direction.UP) {
       return stateManager.getMoveUp();
     } else if (direction == Direction.DOWN) {
       return stateManager.getMoveDown();

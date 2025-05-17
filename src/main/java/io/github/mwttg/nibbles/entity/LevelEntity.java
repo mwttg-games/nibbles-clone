@@ -55,4 +55,8 @@ public class LevelEntity {
             Constants.VIEW,
             Constants.PROJECTION);
   }
+
+  public Level getLevel() {
+    return level;
+  }
 }

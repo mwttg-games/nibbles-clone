@@ -1,6 +1,7 @@
 package io.github.mwttg.nibbles.entity.snake.state;
 
 import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.entity.LevelEntity;
 import io.github.mwttg.nibbles.entity.snake.Snake;
 import io.github.mwttg.nibbles.utilities.Assets;
 import io.github.mwttg.pixelartillery2d.graphic.Sprite;
@@ -31,4 +32,12 @@ public abstract class AbstractSnakeMoveState {
   }
 
   protected abstract Sprite getHeadSprite();
+
+  protected boolean doesHeadHitsApple(final Snake snake, final LevelEntity levelEntity) {
+    return levelEntity.getLevel().isAppleAtPosition(snake.head());
+  }
+
+  protected boolean doesHeadHitsWall(final Snake snake, final LevelEntity levelEntity) {
+    return levelEntity.getLevel().isWallAtPosition(snake.head());
+  }
 }

@@ -1,5 +1,6 @@
 package io.github.mwttg.nibbles.entity.snake.state;
 
+import io.github.mwttg.nibbles.entity.LevelEntity;
 import io.github.mwttg.nibbles.entity.snake.Direction;
 import io.github.mwttg.nibbles.entity.snake.Snake;
 import io.github.mwttg.pixelartillery2d.timer.Timer;
@@ -12,6 +13,7 @@ public class SnakeStateManager {
   private final MoveDownState moveDown;
   private final MoveLeftState moveLeft;
   private final MoveRightState moveRight;
+  private final GrowState growState;
 
   private SnakeState previousState;
   private SnakeState currentState;
@@ -23,11 +25,13 @@ public class SnakeStateManager {
       final SnakeState moveUp,
       final MoveDownState moveDown,
       final MoveLeftState moveLeft,
-      final MoveRightState moveRight) {
+      final MoveRightState moveRight,
+      final GrowState growState) {
     this.moveUp = moveUp;
     this.moveDown = moveDown;
     this.moveLeft = moveLeft;
     this.moveRight = moveRight;
+    this.growState = growState;
     this.previousState = moveLeft;
     this.currentState = moveLeft;
     this.timer = Timer.initialize();
@@ -36,26 +40,38 @@ public class SnakeStateManager {
 
   public static SnakeStateManager initialize() {
     return new SnakeStateManager(
-        new MoveUpState(), new MoveDownState(), new MoveLeftState(), new MoveRightState());
+        new MoveUpState(),
+        new MoveDownState(),
+        new MoveLeftState(),
+        new MoveRightState(),
+        new GrowState());
   }
 
   public void draw(final Snake snake) {
-    currentState.draw(snake);
+    // TODO: Workaround because for GrowState Head Direction not available, yet
+    if (currentState != growState) {
+      currentState.draw(snake);
+    } else {
+      previousState.draw(snake);
+    }
   }
 
-  public Snake update(final Snake snake, final Direction direction) {
+  public Snake update(final Snake snake, final Direction direction, final LevelEntity levelEntity) {
+    // TODO: Grow State makes Snake stop for one interval
     timeWentBy = timeWentBy + timer.getDeltaTime();
     if (timeWentBy > TIME_TO_NEXT_MOVE) {
       timeWentBy = 0.0f;
-      changeState(snake, direction);
+      changeState(snake, direction, levelEntity);
       currentState.playSound();
       return currentState.update(snake);
     }
     return snake;
   }
 
-  private void changeState(final Snake snake, final Direction direction) {
-    final SnakeState newState = currentState.handleStateTransition(snake, direction, this);
+  private void changeState(
+      final Snake snake, final Direction direction, final LevelEntity levelEntity) {
+    final SnakeState newState =
+        currentState.handleStateTransition(snake, direction, levelEntity, this);
     if (newState != currentState) {
       previousState = currentState;
       currentState = newState;
@@ -76,5 +92,13 @@ public class SnakeStateManager {
 
   public MoveRightState getMoveRight() {
     return moveRight;
+  }
+
+  public GrowState getGrowState() {
+    return growState;
+  }
+
+  public SnakeState getPreviousState() {
+    return previousState;
   }
 }

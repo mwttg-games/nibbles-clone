@@ -1,5 +1,6 @@
 package io.github.mwttg.nibbles.entity.snake.state;
 
+import io.github.mwttg.nibbles.entity.LevelEntity;
 import io.github.mwttg.nibbles.entity.snake.Direction;
 import io.github.mwttg.nibbles.entity.snake.Snake;
 
@@ -18,7 +19,10 @@ public class DieState implements SnakeState {
 
   @Override
   public SnakeState handleStateTransition(
-      final Snake snake, Direction direction, SnakeStateManager stateManager) {
+      final Snake snake,
+      final Direction direction,
+      final LevelEntity levelEntity,
+      final SnakeStateManager stateManager) {
     return null;
   }
 }

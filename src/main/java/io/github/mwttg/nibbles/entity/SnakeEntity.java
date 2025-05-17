@@ -28,7 +28,7 @@ public class SnakeEntity {
     snakeStateManager.draw(snake);
   }
 
-  public void update(final Direction direction) {
-    snake = snakeStateManager.update(snake, direction);
+  public void update(final Direction direction, final LevelEntity levelEntity) {
+    snake = snakeStateManager.update(snake, direction, levelEntity);
   }
 }

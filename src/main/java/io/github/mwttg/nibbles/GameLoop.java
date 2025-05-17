@@ -25,7 +25,7 @@ public class GameLoop {
     while (!GLFW.glfwWindowShouldClose(windowId)) {
 
       final Direction direction = keyboard.getDirection(windowId);
-      snakeEntity.update(direction);
+      snakeEntity.update(direction, levelEntity);
 
       // render
       GL41.glClear(GL41.GL_COLOR_BUFFER_BIT | GL41.GL_DEPTH_BUFFER_BIT);

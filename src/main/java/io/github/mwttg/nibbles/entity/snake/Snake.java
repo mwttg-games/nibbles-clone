@@ -21,8 +21,9 @@ public record Snake(Position head, List<Position> tail) {
 
   public Snake grow(final int units) {
     final List<Position> newTail = new ArrayList<>(tail);
+    final Position add = tail.getLast();
     for (int step = 0; step < units; step++) {
-      newTail.addFirst(head);
+      newTail.addLast(add);
     }
     return new Snake(head, newTail);
   }
