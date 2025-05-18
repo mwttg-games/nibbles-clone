@@ -14,21 +14,9 @@ public record Level(Set<Position> walls, Set<Position> apples) {
 
   private static final Logger LOG = LoggerFactory.getLogger(Level.class);
 
-  public static Level initialize() {
-    final Set<Position> walls = initializeWalls();
+  public static Level initialize(final Set<Position> walls) {
     final Set<Position> apples = initializeApples(walls);
     return new Level(walls, apples);
-  }
-
-  private static Set<Position> initializeWalls() {
-    LOG.info("   Initialize Walls ...");
-
-    Set<Position> result = new HashSet<>();
-    for (int i = 12; i < 55; i++ ) {
-      final Position position = new Position(i, 17);
-      result.add(position);
-    }
-    return result;
   }
 
   private static Set<Position> initializeApples(final Set<Position> walls) {

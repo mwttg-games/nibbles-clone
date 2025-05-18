@@ -1,6 +1,7 @@
 package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.entity.level.Rooms;
 import io.github.mwttg.nibbles.entity.snake.Direction;
 import io.github.mwttg.nibbles.entity.snake.Snake;
 import io.github.mwttg.nibbles.utilities.Assets;
@@ -26,7 +27,8 @@ public class SnakeEntity {
 
   public static SnakeEntity initialize(final int x, final int y) {
     LOG.info("Initialize Snake ...");
-    final Snake snake = Snake.initialize(x, y);
+    final Position start = Rooms.level8().start();
+    final Snake snake = Snake.initialize((int) start.x(), (int) start.y());
     return new SnakeEntity(snake);
   }
 

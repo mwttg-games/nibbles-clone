@@ -2,6 +2,7 @@ package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
 import io.github.mwttg.nibbles.entity.level.Level;
+import io.github.mwttg.nibbles.entity.level.Rooms;
 import io.github.mwttg.nibbles.utilities.Assets;
 import java.util.List;
 import org.joml.Matrix4f;
@@ -15,10 +16,12 @@ public class LevelEntity {
   private static final Matrix4f BACKGROUND_TRANSFORM =
       new Matrix4f().translate(0.0f, 0.0f, Constants.LEVEL_Z_LAYER);
 
+//  private final Rooms rooms;
   private final Level level;
 
   private LevelEntity() {
-    this.level = Level.initialize();
+//    this.rooms = Rooms.initialize();
+    this.level = Level.initialize(Rooms.level8().walls());
   }
 
   public static LevelEntity initialize() {
