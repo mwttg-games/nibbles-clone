@@ -1,6 +1,7 @@
 package io.github.mwttg.nibbles.entity.snake;
 
 import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.entity.LevelEntity;
 import io.github.mwttg.nibbles.entity.Position;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,5 +64,26 @@ public record Snake(Position head, List<Position> tail) {
 
   public boolean doesBitOwnTail() {
     return tail.contains(head);
+  }
+
+  public boolean doesHeadHitsApple(final LevelEntity levelEntity) {
+    return levelEntity.getLevel().isAppleAtPosition(head);
+  }
+
+  public boolean doesHeadHitsWall(final LevelEntity levelEntity) {
+    if (getNormalizedX() == Constants.MIN_X - 1) { // left Level border
+      return true;
+    }
+    if (getNormalizedX() == Constants.MAX_X) { // right Level border
+      return true;
+    }
+    if (getNormalizedY() == Constants.MIN_Y - 1) { // bottom Level border
+      return true;
+    }
+    if (getNormalizedY() == Constants.MAX_Y) { // top Level border
+      return true;
+    }
+
+    return levelEntity.getLevel().isWallAtPosition(head());
   }
 }
