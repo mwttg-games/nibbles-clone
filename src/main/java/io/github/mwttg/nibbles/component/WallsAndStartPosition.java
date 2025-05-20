@@ -1,6 +1,4 @@
-package io.github.mwttg.nibbles.entity.level;
-
-import io.github.mwttg.nibbles.entity.Position;
+package io.github.mwttg.nibbles.component;
 
 import java.util.Set;
 

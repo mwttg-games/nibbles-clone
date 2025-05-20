@@ -1,111 +1,83 @@
 package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
-import io.github.mwttg.nibbles.entity.level.Rooms;
-import io.github.mwttg.nibbles.entity.snake.Direction;
-import io.github.mwttg.nibbles.entity.snake.Snake;
-import io.github.mwttg.nibbles.utilities.Assets;
-import org.lwjgl.opengl.GL41;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.github.mwttg.nibbles.component.Direction;
+import java.util.List;
+
+import io.github.mwttg.nibbles.component.Position;
+import org.joml.Matrix4f;
 
 public class SnakeEntity {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SnakeEntity.class);
-
-  private Snake snake;
+  private Position head;
+  private List<Position> tail;
+  private boolean isAlive;
   private Direction direction;
-  private boolean alive;
-  private float timeWentBy;
+  private float deltaTimeSinceLastMove;
 
-  private SnakeEntity(final Snake snake) {
-    this.snake = snake;
-    this.alive = true;
+  private SnakeEntity(final int x, final int y) {
+    this.head = new Position(x, y);
+    this.tail = List.of(new Position(x + 1, y));
+    this.isAlive = true;
     this.direction = Direction.LEFT;
-    this.timeWentBy = 0.0f;
+    this.deltaTimeSinceLastMove = 0.0f;
   }
 
   public static SnakeEntity initialize(final int x, final int y) {
-    LOG.info("Initialize Snake ...");
-    final Position start = Rooms.level8().start();
-    final Snake snake = Snake.initialize((int) start.x(), (int) start.y());
-    return new SnakeEntity(snake);
+    return new SnakeEntity(x, y);
   }
 
-  public void draw() {
-    drawTail();
-    drawHead();
+  public Position getHead() {
+    return head;
   }
 
-  private void drawTail() {
-    GL41.glUseProgram(Assets.getInstance().getInstancedShaderId());
-    Assets.getInstance()
-        .getSpriteSnakeTail()
-        .draw(
-            Assets.getInstance().getInstancedUniform(),
-            snake.getTailTransforms(),
-            Constants.VIEW,
-            Constants.PROJECTION);
+  public Matrix4f getHeadTransform() {
+    return new Matrix4f().translate(head.x(), head.y(), Constants.SNAKE_Z_LAYER);
   }
 
-  private void drawHead() {
-    GL41.glUseProgram(Assets.getInstance().getShaderId());
-    switch (direction) {
-      case UP ->
-          Assets.getInstance()
-              .getSpriteSnakeHeadUp()
-              .draw(
-                  Assets.getInstance().getUniform(),
-                  snake.getHeadTransform(),
-                  Constants.VIEW,
-                  Constants.PROJECTION);
-      case DOWN ->
-          Assets.getInstance()
-              .getSpriteSnakeHeadDown()
-              .draw(
-                  Assets.getInstance().getUniform(),
-                  snake.getHeadTransform(),
-                  Constants.VIEW,
-                  Constants.PROJECTION);
-      case LEFT ->
-          Assets.getInstance()
-              .getSpriteSnakeHeadLeft()
-              .draw(
-                  Assets.getInstance().getUniform(),
-                  snake.getHeadTransform(),
-                  Constants.VIEW,
-                  Constants.PROJECTION);
-      case RIGHT ->
-          Assets.getInstance()
-              .getSpriteSnakeHeadRight()
-              .draw(
-                  Assets.getInstance().getUniform(),
-                  snake.getHeadTransform(),
-                  Constants.VIEW,
-                  Constants.PROJECTION);
-    }
+  public void setHead(Position head) {
+    this.head = head;
   }
 
-  public void update(final Direction direction, final LevelEntity levelEntity, final float deltaTime) {
+  public List<Position> getTail() {
+    return tail;
+  }
+
+  public List<Matrix4f> getTailTransforms() {
+    return tail.stream()
+        .map(pos -> new Matrix4f().translate(pos.x(), pos.y(), Constants.SNAKE_Z_LAYER))
+        .toList();
+  }
+
+  public void setTail(List<Position> tail) {
+    this.tail = tail;
+  }
+
+  public boolean isAlive() {
+    return isAlive;
+  }
+
+  public void setAlive(boolean alive) {
+    isAlive = alive;
+  }
+
+  public Direction getDirection() {
+    return direction;
+  }
+
+  public void setDirection(Direction direction) {
     this.direction = direction;
-    timeWentBy = timeWentBy + deltaTime;
+  }
 
-    if (alive && (snake.doesBitOwnTail() || snake.doesHeadHitsWall(levelEntity))) {
-      Assets.getInstance().getSoundDead().play();
-      alive = false;
-      // TODO reset Snake / remove life
-    }
+  public float getDeltaTimeSinceLastMove() {
+    return deltaTimeSinceLastMove;
+  }
 
-    if (snake.doesHeadHitsApple(levelEntity)) {
-      Assets.getInstance().getSoundEat().play();
-      levelEntity.getLevel().removeAppleFromPosition(snake.head());
-      snake = snake.grow(5);
-    }
+  public void addDeltaTime(final float deltaTime) {
+    deltaTimeSinceLastMove = deltaTimeSinceLastMove + deltaTime;
+  }
 
-    if (timeWentBy > Constants.SNAKE_TIME_TO_NEXT_MOVE && alive) {
-      Assets.getInstance().getSoundMove().play();
-      snake = snake.move(direction);
-      timeWentBy = 0.0f;
-    }
+  public void resetDeltaTime() {
+    deltaTimeSinceLastMove = 0.0f;
   }
 }

@@ -1,4 +1,4 @@
-package io.github.mwttg.nibbles.entity.snake;
+package io.github.mwttg.nibbles.component;
 
 public enum Direction {
   UP,

@@ -1,65 +1,32 @@
 package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
-import io.github.mwttg.nibbles.entity.level.Level;
-import io.github.mwttg.nibbles.entity.level.Rooms;
-import io.github.mwttg.nibbles.utilities.Assets;
 import java.util.List;
+import java.util.Set;
+
+import io.github.mwttg.nibbles.component.Position;
+import io.github.mwttg.nibbles.component.Rooms;
 import org.joml.Matrix4f;
-import org.lwjgl.opengl.GL41;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class LevelEntity {
 
-  private static final Logger LOG = LoggerFactory.getLogger(LevelEntity.class);
-  private static final Matrix4f BACKGROUND_TRANSFORM =
-      new Matrix4f().translate(0.0f, 0.0f, Constants.LEVEL_Z_LAYER);
+  private Set<Position> walls;
 
-//  private final Rooms rooms;
-  private final Level level;
-
-  private LevelEntity() {
-//    this.rooms = Rooms.initialize();
-    this.level = Level.initialize(Rooms.level8().walls());
+  private LevelEntity(final Set<Position> walls) {
+    this.walls = walls;
   }
 
   public static LevelEntity initialize() {
-    LOG.info("Initialize Level ...");
-    return new LevelEntity();
+    return new LevelEntity(Rooms.level1().walls());
   }
 
-  public void draw() {
-    GL41.glUseProgram(Assets.getInstance().getShaderId());
-    Assets.getInstance()
-        .getSpriteBackground()
-        .draw(
-            Assets.getInstance().getUniform(),
-            BACKGROUND_TRANSFORM,
-            Constants.VIEW,
-            Constants.PROJECTION);
-
-    GL41.glUseProgram(Assets.getInstance().getInstancedShaderId());
-    final List<Matrix4f> wallTransforms = level.getWallTransforms();
-    Assets.getInstance()
-        .getSpriteWall()
-        .draw(
-            Assets.getInstance().getInstancedUniform(),
-            wallTransforms,
-            Constants.VIEW,
-            Constants.PROJECTION);
-
-    final List<Matrix4f> appleTransforms = level.getAppleTransforms();
-    Assets.getInstance()
-        .getSpriteApple()
-        .draw(
-            Assets.getInstance().getInstancedUniform(),
-            appleTransforms,
-            Constants.VIEW,
-            Constants.PROJECTION);
+  public Set<Position> getWalls() {
+    return walls;
   }
 
-  public Level getLevel() {
-    return level;
+  public List<Matrix4f> getWallTransforms() {
+    return walls.stream()
+        .map(pos -> new Matrix4f().translate(pos.x(), pos.y(), Constants.WALLS_Z_LAYER))
+        .toList();
   }
 }
