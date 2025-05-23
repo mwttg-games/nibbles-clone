@@ -2,9 +2,8 @@ package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
 import io.github.mwttg.nibbles.component.Direction;
-import java.util.List;
-
 import io.github.mwttg.nibbles.component.Position;
+import java.util.List;
 import org.joml.Matrix4f;
 
 public class SnakeEntity {

@@ -1,35 +1,51 @@
 package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
-import java.util.List;
-import java.util.Set;
-
 import io.github.mwttg.nibbles.component.Position;
 import org.joml.Matrix4f;
 
 public class AppleEntity {
 
-  private Set<Position> positions;
+  private Position position;
+  private int currentApple;
+  private boolean isCurrentAppleEaten;
 
-  private AppleEntity(final Set<Position> positions) {
-    this.positions = positions;
+  private AppleEntity() {
+    currentApple = 1;
+    isCurrentAppleEaten = true;
   }
 
-  public static AppleEntity initialize(final Set<Position> positions) {
-    return new AppleEntity(positions);
+  public static AppleEntity initialize() {
+    return new AppleEntity();
   }
 
-  public Set<Position> getPositions() {
-    return positions;
+  public Position getPosition() {
+    return position;
   }
 
-  public List<Matrix4f> getTransforms() {
-    return positions.stream()
-            .map(pos -> new Matrix4f().translate(pos.x(), pos.y(), Constants.APPLES_Z_LAYER))
-            .toList();
+  public Matrix4f getTransforms() {
+    return new Matrix4f().translate(position.x(), position.y(), Constants.APPLES_Z_LAYER);
   }
 
-  public void removeApple(final Position position) {
-    positions.remove(position);
+  public boolean isCurrentAppleEaten() {
+    return isCurrentAppleEaten;
+  }
+
+  public void setCurrentAppleEaten() {
+    isCurrentAppleEaten = true;
+  }
+
+  public void nextApple(final Position position) {
+    isCurrentAppleEaten = false;
+    this.position = position;
+    currentApple = currentApple + 1;
+  }
+
+  public boolean isLastApple() {
+    return currentApple == Constants.MAX_APPLES;
+  }
+
+  public boolean allApplesDone() {
+    return currentApple == Constants.MAX_APPLES + 1;
   }
 }

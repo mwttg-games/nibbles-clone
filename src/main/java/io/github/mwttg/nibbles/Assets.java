@@ -15,10 +15,11 @@ public class Assets {
   private final StaticSprite spriteSnakeHeadDown;
   private final StaticSprite spriteSnakeHeadLeft;
   private final StaticSprite spriteSnakeHeadRight;
+  private final StaticSprite spriteLastApple;
+  private final StaticSprite spriteSingleApple;
 
   private final InstancedStaticSprite spriteSnakeTail;
   private final InstancedStaticSprite spriteWall;
-  private final InstancedStaticSprite spriteApple;
 
   private final Sound soundMove;
   private final Sound soundEat;
@@ -43,9 +44,10 @@ public class Assets {
     this.spriteSnakeHeadDown = StaticSprite.create(1.0f, 1.0f, "./data/sprites/head_down.png");
     this.spriteSnakeHeadLeft = StaticSprite.create(1.0f, 1.0f, "./data/sprites/head_left.png");
     this.spriteSnakeHeadRight = StaticSprite.create(1.0f, 1.0f, "./data/sprites/head_right.png");
+    this.spriteSingleApple = StaticSprite.create(1.0f, 1.0f, "./data/sprites/apple.png");
+    this.spriteLastApple = StaticSprite.create(1.0f, 1.0f, "./data/sprites/last_apple.png");
 
     this.spriteSnakeTail = InstancedStaticSprite.create(1.0f, 1.0f, "./data/sprites/tail.png");
-    this.spriteApple = InstancedStaticSprite.create(1.0f, 1.0f, "./data/sprites/apple.png");
     this.spriteWall = InstancedStaticSprite.create(1.0f, 1.0f, "./data/sprites/wall.png");
 
     this.soundMove = Sound.create("./data/sounds/move.wav");
@@ -97,16 +99,20 @@ public class Assets {
     return spriteSnakeHeadRight;
   }
 
+  public StaticSprite getSpriteLastApple() {
+    return spriteLastApple;
+  }
+
+  public StaticSprite getSpriteSingleApple() {
+    return spriteSingleApple;
+  }
+
   public InstancedStaticSprite getSpriteSnakeTail() {
     return spriteSnakeTail;
   }
 
   public InstancedStaticSprite getSpriteWall() {
     return spriteWall;
-  }
-
-  public InstancedStaticSprite getSpriteApple() {
-    return spriteApple;
   }
 
   public Sound getSoundMove() {

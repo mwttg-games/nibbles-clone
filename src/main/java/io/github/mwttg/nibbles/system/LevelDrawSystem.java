@@ -1,8 +1,8 @@
 package io.github.mwttg.nibbles.system;
 
+import io.github.mwttg.nibbles.Assets;
 import io.github.mwttg.nibbles.Constants;
 import io.github.mwttg.nibbles.entity.LevelEntity;
-import io.github.mwttg.nibbles.Assets;
 import java.util.List;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL41;

@@ -1,11 +1,10 @@
 package io.github.mwttg.nibbles.system;
 
+import io.github.mwttg.nibbles.Assets;
 import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.component.Direction;
 import io.github.mwttg.nibbles.component.Position;
 import io.github.mwttg.nibbles.entity.SnakeEntity;
-import io.github.mwttg.nibbles.component.Direction;
-import io.github.mwttg.nibbles.Assets;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,8 @@ public final class SnakeMoveSystem {
   }
 
   // avoid 180 degree turns
-  private static Direction directionCorrection(final Direction oldDirection, final Direction newDirection) {
+  private static Direction directionCorrection(
+      final Direction oldDirection, final Direction newDirection) {
     if (oldDirection == Direction.UP && newDirection == Direction.DOWN) {
       return Direction.UP;
     }

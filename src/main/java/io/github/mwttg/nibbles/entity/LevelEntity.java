@@ -1,11 +1,10 @@
 package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
-import java.util.List;
-import java.util.Set;
-
 import io.github.mwttg.nibbles.component.Position;
 import io.github.mwttg.nibbles.component.Rooms;
+import java.util.List;
+import java.util.Set;
 import org.joml.Matrix4f;
 
 public class LevelEntity {

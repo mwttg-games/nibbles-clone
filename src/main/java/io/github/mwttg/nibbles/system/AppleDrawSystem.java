@@ -1,23 +1,29 @@
 package io.github.mwttg.nibbles.system;
 
+import io.github.mwttg.nibbles.Assets;
 import io.github.mwttg.nibbles.Constants;
 import io.github.mwttg.nibbles.entity.AppleEntity;
-import io.github.mwttg.nibbles.Assets;
-import java.util.List;
 import org.joml.Matrix4f;
+import org.lwjgl.opengl.GL41;
 
-public final class AppleDrawSystem {
+public class AppleDrawSystem {
 
   private AppleDrawSystem() {}
 
-  public static void drawApples(final AppleEntity entity) {
-    final List<Matrix4f> appleTransforms = entity.getTransforms();
+  public static void drawApples(final AppleEntity appleEntity) {
+    final Matrix4f transform = appleEntity.getTransforms();
+
+    GL41.glUseProgram(Assets.getInstance().getShaderId());
+
+    if (appleEntity.isLastApple()) {
+      Assets.getInstance()
+          .getSpriteLastApple()
+          .draw(Assets.getInstance().getUniform(), transform, Constants.VIEW, Constants.PROJECTION);
+      return;
+    }
+
     Assets.getInstance()
-        .getSpriteApple()
-        .draw(
-            Assets.getInstance().getInstancedUniform(),
-            appleTransforms,
-            Constants.VIEW,
-            Constants.PROJECTION);
+        .getSpriteSingleApple()
+        .draw(Assets.getInstance().getUniform(), transform, Constants.VIEW, Constants.PROJECTION);
   }
 }

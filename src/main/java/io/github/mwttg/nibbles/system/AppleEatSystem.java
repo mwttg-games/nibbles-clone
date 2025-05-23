@@ -1,13 +1,11 @@
 package io.github.mwttg.nibbles.system;
 
-import io.github.mwttg.nibbles.entity.AppleEntity;
-import io.github.mwttg.nibbles.component.Position;
-import io.github.mwttg.nibbles.entity.SnakeEntity;
 import io.github.mwttg.nibbles.Assets;
-
+import io.github.mwttg.nibbles.component.Position;
+import io.github.mwttg.nibbles.entity.AppleEntity;
+import io.github.mwttg.nibbles.entity.SnakeEntity;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public final class AppleEatSystem {
 
@@ -18,14 +16,14 @@ public final class AppleEatSystem {
   public static void eatApple(final SnakeEntity snakeEntity, final AppleEntity appleEntity) {
     final Position head = snakeEntity.getHead();
     final List<Position> tail = snakeEntity.getTail();
-    final Set<Position> apples = appleEntity.getPositions();
+    final Position apple = appleEntity.getPosition();
 
-    if (!apples.contains(head)) {
+    if (!apple.equals(head)) {
       return;
     }
 
     Assets.getInstance().getSoundEat().play();
-    appleEntity.removeApple(head);
+    appleEntity.setCurrentAppleEaten();
     final List<Position> newTail = growSnakeTail(tail);
     snakeEntity.setTail(newTail);
   }

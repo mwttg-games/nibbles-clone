@@ -1,11 +1,10 @@
 package io.github.mwttg.nibbles.system;
 
-import io.github.mwttg.nibbles.Constants;
-import io.github.mwttg.nibbles.entity.LevelEntity;
-import io.github.mwttg.nibbles.component.Position;
-import io.github.mwttg.nibbles.entity.SnakeEntity;
 import io.github.mwttg.nibbles.Assets;
-
+import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.component.Position;
+import io.github.mwttg.nibbles.entity.LevelEntity;
+import io.github.mwttg.nibbles.entity.SnakeEntity;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public final class SnakeCollisionSystem {
     final List<Position> tail = snakeEntity.getTail();
     final boolean doesHitTail = doesSnakeHitsOwnTail(head, tail);
 
-    if (!doesHitBorder && !doesHitWall && ! doesHitTail) {
+    if (!doesHitBorder && !doesHitWall && !doesHitTail) {
       return;
     }
 
