@@ -6,6 +6,7 @@ import io.github.mwttg.pixelartillery2d.graphic.GameWindow;
 import io.github.mwttg.pixelartillery2d.graphic.OpenGlConfiguration;
 import io.github.mwttg.pixelartillery2d.sound.SoundDevice;
 import io.github.mwttg.pixelartillery2d.sound.SoundListener;
+import org.lwjgl.glfw.GLFW;
 
 public class Nibbles {
 
@@ -14,6 +15,7 @@ public class Nibbles {
     SoundListener.setGain(0.1f);
 
     final long windowId = GameWindow.create(openGlConfiguration());
+    GLFW.glfwSetInputMode(windowId, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_HIDDEN);
     final GameLoop gameLoop = new GameLoop();
     gameLoop.execute(windowId);
 
