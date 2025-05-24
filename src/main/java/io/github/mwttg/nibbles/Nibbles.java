@@ -12,7 +12,7 @@ public class Nibbles {
 
   public static void main(final String[] args) {
     SoundDevice.initialize();
-    SoundListener.setGain(0.1f);
+    SoundListener.setGain(Constants.VOLUME);
 
     final long windowId = GameWindow.create(openGlConfiguration());
     GLFW.glfwSetInputMode(windowId, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_HIDDEN);

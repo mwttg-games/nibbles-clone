@@ -1,6 +1,8 @@
 package io.github.mwttg.nibbles.system;
 
+import io.github.mwttg.nibbles.component.Constants;
 import io.github.mwttg.nibbles.component.Direction;
+import io.github.mwttg.pixelartillery2d.sound.SoundListener;
 import org.lwjgl.glfw.GLFW;
 
 public final class KeyboardSystem {
@@ -30,6 +32,12 @@ public final class KeyboardSystem {
     if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_RIGHT) == GLFW.GLFW_PRESS) {
       PREVIOUS = Direction.RIGHT;
       return Direction.RIGHT;
+    }
+    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_M) == GLFW.GLFW_PRESS) {
+      SoundListener.setGain(0.0f);
+    }
+    if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_S) == GLFW.GLFW_PRESS) {
+      SoundListener.setGain(Constants.VOLUME);
     }
 
     return PREVIOUS;

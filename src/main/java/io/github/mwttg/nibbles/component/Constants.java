@@ -40,4 +40,7 @@ public interface Constants {
   int MIN_Y = 1;
   int MAX_Y = (SCALED_RESOLUTION_Y / TILE_WIDTH) - 1;
   float LEVEL_Z_LAYER = -3.0f;
+
+  // SOUND
+  float VOLUME = 0.15f;
 }

@@ -28,6 +28,9 @@ If you want to play the original Nibbles, you can try the following link:
 | DOWN-Arrow  | Set direction DOWN  |
 | LEFT-Arrow  | Set direction LEFT  |
 | RIGHT-Arrow | Set direction RIGHT |
+| M           | Mute Sound          |
+| S           | Sound on            |
+
 
 ## Links
 
