@@ -13,6 +13,10 @@ public final class SnakeDrawSystem {
   private SnakeDrawSystem() {}
 
   public static void drawSnake(final SnakeEntity snakeEntity) {
+    if (snakeEntity.isStopped()) {
+      return;
+    }
+
     final Direction direction = snakeEntity.getDirection();
     final Matrix4f headTransform = snakeEntity.getHeadTransform();
     final List<Matrix4f> tailTransforms = snakeEntity.getTailTransforms();

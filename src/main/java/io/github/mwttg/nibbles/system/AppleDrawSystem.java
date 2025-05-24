@@ -22,8 +22,10 @@ public class AppleDrawSystem {
       return;
     }
 
-    Assets.getInstance()
-        .getSpriteSingleApple()
-        .draw(Assets.getInstance().getUniform(), transform, Constants.VIEW, Constants.PROJECTION);
+    if (!appleEntity.allApplesDone()) {
+      Assets.getInstance()
+          .getSpriteSingleApple()
+          .draw(Assets.getInstance().getUniform(), transform, Constants.VIEW, Constants.PROJECTION);
+    }
   }
 }

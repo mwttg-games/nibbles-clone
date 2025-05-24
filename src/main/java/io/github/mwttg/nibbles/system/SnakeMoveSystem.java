@@ -21,6 +21,10 @@ public final class SnakeMoveSystem {
       return;
     }
 
+    if (snakeEntity.isStopped()) {
+      return;
+    }
+
     if (deltaTimeSinceLastMove < Constants.SNAKE_TIME_TO_NEXT_MOVE) {
       return;
     }

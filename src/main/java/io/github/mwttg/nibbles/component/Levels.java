@@ -6,16 +6,26 @@ import java.util.Set;
 
 public interface Levels {
 
+  int LAST_LEVEL = 8;
+
   Map<Integer, WallsAndStartPosition> LEVEL_BY_ID =
       Map.of(
-          1, level1(),
-          2, level2(),
-          3, level3(),
-          4, level4(),
-          5, level5(),
-          6, level6(),
-          7, level7(),
-          8, level8());
+          1,
+          level1(),
+          2,
+          level2(),
+          3,
+          level3(),
+          4,
+          level4(),
+          5,
+          level5(),
+          6,
+          level6(),
+          7,
+          level7(),
+          LAST_LEVEL,
+          level8());
 
   private static WallsAndStartPosition level1() {
     Set<Position> walls = new HashSet<>();

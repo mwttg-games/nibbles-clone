@@ -10,13 +10,17 @@ public class Assets {
   private static final Logger LOG = LoggerFactory.getLogger(Assets.class);
   private static Assets INSTANCE;
 
-  private final StaticSprite spriteBackground;
-  private final StaticSprite spriteSnakeHeadUp;
-  private final StaticSprite spriteSnakeHeadDown;
-  private final StaticSprite spriteSnakeHeadLeft;
-  private final StaticSprite spriteSnakeHeadRight;
-  private final StaticSprite spriteLastApple;
-  private final StaticSprite spriteSingleApple;
+  private final Sprite messageDead;
+  private final Sprite messageNext;
+  private final Sprite messageWon;
+
+  private final Sprite spriteBackground;
+  private final Sprite spriteSnakeHeadUp;
+  private final Sprite spriteSnakeHeadDown;
+  private final Sprite spriteSnakeHeadLeft;
+  private final Sprite spriteSnakeHeadRight;
+  private final Sprite spriteLastApple;
+  private final Sprite spriteSingleApple;
 
   private final InstancedStaticSprite spriteSnakeTail;
   private final InstancedStaticSprite spriteWall;
@@ -39,6 +43,10 @@ public class Assets {
     this.instancedUniform = InstancedUniform.create(instancedShaderId);
 
     this.spriteBackground = StaticSprite.create(64, 36, "./data/sprites/background.png");
+
+    this.messageDead = StaticSprite.create(15.0f, 5.0f, "./data/sprites/message_dead.png");
+    this.messageNext = StaticSprite.create(15.0f, 5.0f, "./data/sprites/message_next.png");
+    this.messageWon = StaticSprite.create(15.0f, 5.0f, "./data/sprites/message_won.png");
 
     this.spriteSnakeHeadUp = StaticSprite.create(1.0f, 1.0f, "./data/sprites/head_up.png");
     this.spriteSnakeHeadDown = StaticSprite.create(1.0f, 1.0f, "./data/sprites/head_down.png");
@@ -79,31 +87,43 @@ public class Assets {
     return instancedUniform;
   }
 
-  public StaticSprite getSpriteBackground() {
+  public Sprite getSpriteBackground() {
     return spriteBackground;
   }
 
-  public StaticSprite getSpriteSnakeHeadUp() {
+  public Sprite getMessageDead() {
+    return messageDead;
+  }
+
+  public Sprite getMessageNext() {
+    return messageNext;
+  }
+
+  public Sprite getMessageWon() {
+    return messageWon;
+  }
+
+  public Sprite getSpriteSnakeHeadUp() {
     return spriteSnakeHeadUp;
   }
 
-  public StaticSprite getSpriteSnakeHeadDown() {
+  public Sprite getSpriteSnakeHeadDown() {
     return spriteSnakeHeadDown;
   }
 
-  public StaticSprite getSpriteSnakeHeadLeft() {
+  public Sprite getSpriteSnakeHeadLeft() {
     return spriteSnakeHeadLeft;
   }
 
-  public StaticSprite getSpriteSnakeHeadRight() {
+  public Sprite getSpriteSnakeHeadRight() {
     return spriteSnakeHeadRight;
   }
 
-  public StaticSprite getSpriteLastApple() {
+  public Sprite getSpriteLastApple() {
     return spriteLastApple;
   }
 
-  public StaticSprite getSpriteSingleApple() {
+  public Sprite getSpriteSingleApple() {
     return spriteSingleApple;
   }
 

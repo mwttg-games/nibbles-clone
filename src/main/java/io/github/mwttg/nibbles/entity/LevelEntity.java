@@ -21,6 +21,11 @@ public class LevelEntity {
     return new LevelEntity();
   }
 
+  public void reset() {
+    this.currentLevel = 1;
+    this.walls = Levels.LEVEL_BY_ID.get(currentLevel).walls();
+  }
+
   public void nextLevel() {
     currentLevel = currentLevel + 1;
     walls = Levels.LEVEL_BY_ID.get(currentLevel).walls();
@@ -28,6 +33,10 @@ public class LevelEntity {
 
   public Position getSnakeStartPosition() {
     return Levels.LEVEL_BY_ID.get(currentLevel).start();
+  }
+
+  public boolean isLastLevel() {
+    return currentLevel == Levels.LAST_LEVEL;
   }
 
   public Set<Position> getWalls() {

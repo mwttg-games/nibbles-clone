@@ -11,19 +11,24 @@ public class SnakeEntity {
   private Position head;
   private List<Position> tail;
   private boolean isAlive;
+  private boolean isStopped;
   private Direction direction;
   private float deltaTimeSinceLastMove;
 
-  private SnakeEntity(final int x, final int y) {
-    this.head = new Position(x, y);
-    this.tail = List.of(new Position(x + 1, y), new Position(x + 2, y));
+  private SnakeEntity(final Position position) {
+    this.head = position;
+    this.tail =
+        List.of(
+            new Position(position.x() + 1, position.y()),
+            new Position(position.x() + 2, position.y()));
     this.isAlive = true;
+    this.isStopped = false;
     this.direction = Direction.LEFT;
     this.deltaTimeSinceLastMove = 0.0f;
   }
 
-  public static SnakeEntity initialize(final int x, final int y) {
-    return new SnakeEntity(x, y);
+  public static SnakeEntity initialize(final Position position) {
+    return new SnakeEntity(position);
   }
 
   public void reset(final Position startPosition) {
@@ -33,6 +38,7 @@ public class SnakeEntity {
             new Position(startPosition.x() + 1, startPosition.y()),
             new Position(startPosition.x() + 2, startPosition.y()));
     this.isAlive = true;
+    this.isStopped = false;
     this.direction = Direction.LEFT;
     this.deltaTimeSinceLastMove = 0.0f;
   }
@@ -69,6 +75,14 @@ public class SnakeEntity {
 
   public void setAlive(boolean alive) {
     isAlive = alive;
+  }
+
+  public boolean isStopped() {
+    return isStopped;
+  }
+
+  public void stopSnake() {
+    isStopped = true;
   }
 
   public Direction getDirection() {

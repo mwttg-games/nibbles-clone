@@ -21,7 +21,7 @@ public class GameLoop {
     Assets.getInstance();
     this.timer = Timer.initialize();
     this.levelEntity = LevelEntity.initialize();
-    this.snakeEntity = SnakeEntity.initialize(60, 10);
+    this.snakeEntity = SnakeEntity.initialize(levelEntity.getSnakeStartPosition());
     this.appleEntity = AppleEntity.initialize();
   }
 
@@ -34,9 +34,8 @@ public class GameLoop {
 
       SnakeCollisionSystem.checkCollision(snakeEntity, levelEntity);
       ApplePlaceSystem.placeApple(appleEntity, levelEntity, snakeEntity);
-      AppleEatSystem.eatApple(snakeEntity, appleEntity);
       SnakeMoveSystem.move(snakeEntity, direction, deltaTime);
-      LevelChangeSystem.changeLevel(snakeEntity, levelEntity, appleEntity);
+      AppleEatSystem.eatApple(snakeEntity, appleEntity);
 
       // render
       GL41.glClear(GL41.GL_COLOR_BUFFER_BIT | GL41.GL_DEPTH_BUFFER_BIT);
@@ -44,6 +43,7 @@ public class GameLoop {
       LevelDrawSystem.drawLevel(levelEntity);
       AppleDrawSystem.drawApples(appleEntity);
       SnakeDrawSystem.drawSnake(snakeEntity);
+      UserMessageSystem.showMessage(windowId, snakeEntity, levelEntity, appleEntity);
 
       GLFW.glfwSwapBuffers(windowId);
       GLFW.glfwPollEvents();

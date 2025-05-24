@@ -15,6 +15,7 @@ public class Nibbles {
     SoundListener.setGain(Constants.VOLUME);
 
     final long windowId = GameWindow.create(openGlConfiguration());
+    GLFW.glfwSetInputMode(windowId, GLFW.GLFW_STICKY_KEYS, GLFW.GLFW_FALSE);
     GLFW.glfwSetInputMode(windowId, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_HIDDEN);
     final GameLoop gameLoop = new GameLoop();
     gameLoop.execute(windowId);

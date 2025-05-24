@@ -43,4 +43,8 @@ public interface Constants {
 
   // SOUND
   float VOLUME = 0.15f;
+
+  // MESSAGES
+  float MESSAGE_Z_LAYER = -0.5f;
+  Matrix4f MESSAGE_TRANSFORM = new Matrix4f().translate(25.0f, 16.0f, MESSAGE_Z_LAYER);
 }
