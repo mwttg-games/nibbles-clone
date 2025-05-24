@@ -1,7 +1,7 @@
 package io.github.mwttg.nibbles.system;
 
 import io.github.mwttg.nibbles.component.Assets;
-import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.component.Constants;
 import io.github.mwttg.nibbles.component.Position;
 import io.github.mwttg.nibbles.entity.LevelEntity;
 import io.github.mwttg.nibbles.entity.SnakeEntity;

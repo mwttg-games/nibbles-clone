@@ -1,5 +1,6 @@
 package io.github.mwttg.nibbles;
 
+import io.github.mwttg.nibbles.component.Constants;
 import io.github.mwttg.pixelartillery2d.cleanup.CleanUp;
 import io.github.mwttg.pixelartillery2d.graphic.GameWindow;
 import io.github.mwttg.pixelartillery2d.graphic.OpenGlConfiguration;

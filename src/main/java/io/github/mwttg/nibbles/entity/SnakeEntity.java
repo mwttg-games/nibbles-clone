@@ -1,6 +1,6 @@
 package io.github.mwttg.nibbles.entity;
 
-import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.component.Constants;
 import io.github.mwttg.nibbles.component.Direction;
 import io.github.mwttg.nibbles.component.Position;
 import java.util.List;

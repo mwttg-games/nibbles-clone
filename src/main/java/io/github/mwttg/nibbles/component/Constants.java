@@ -1,4 +1,4 @@
-package io.github.mwttg.nibbles;
+package io.github.mwttg.nibbles.component;
 
 import org.joml.Matrix4f;
 
