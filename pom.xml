@@ -24,7 +24,68 @@
         <maven.native.plugin.version>0.10.6</maven.native.plugin.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- get recommended dependency versions from the LWJGL BOM -->
+            <dependency>
+                <groupId>org.lwjgl</groupId>
+                <artifactId>lwjgl-bom</artifactId>
+                <version>${lwjgl.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
+        <!-- LWJGL modules used: minimal OpenGL -->
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-glfw</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-openal</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-opengl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-stb</artifactId>
+        </dependency>
+        <!-- LWJGL native modules for the above -->
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl</artifactId>
+            <classifier>natives-${platform}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-glfw</artifactId>
+            <classifier>natives-${platform}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-openal</artifactId>
+            <classifier>natives-${platform}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-opengl</artifactId>
+            <classifier>natives-${platform}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.lwjgl</groupId>
+            <artifactId>lwjgl-stb</artifactId>
+            <classifier>natives-${platform}</classifier>
+        </dependency>
+
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -41,6 +102,82 @@
             <version>${joml-version}</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <!-- profiles based on OS platforms (64-bit architectures only) -->
+        <profile>
+            <id>linux-amd64</id>
+            <activation>
+                <os>
+                    <family>Linux</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <platform>linux</platform>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-arm64</id>
+            <activation>
+                <os>
+                    <family>Linux</family>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <platform>linux-arm64</platform>
+            </properties>
+        </profile>
+        <profile>
+            <id>mac-amd64</id>
+            <activation>
+                <os>
+                    <family>Mac</family>
+                    <arch>x86_64</arch>
+                </os>
+            </activation>
+            <properties>
+                <platform>macos</platform>
+            </properties>
+        </profile>
+        <profile>
+            <id>mac-arm64</id>
+            <activation>
+                <os>
+                    <family>Mac</family>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <platform>macos-arm64</platform>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows-amd64</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <platform>windows</platform>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows-arm64</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <platform>windows-arm64</platform>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -124,5 +261,8 @@
             <email>marco-wittig@gmx.de</email>
         </developer>
     </developers>
+
+
+
 
 </project>
