@@ -1,5 +1,6 @@
 package io.github.mwttg.nibbles;
 
+import io.github.mwttg.nibbles.component.Assets;
 import io.github.mwttg.nibbles.component.Direction;
 import io.github.mwttg.nibbles.entity.AppleEntity;
 import io.github.mwttg.nibbles.entity.LevelEntity;

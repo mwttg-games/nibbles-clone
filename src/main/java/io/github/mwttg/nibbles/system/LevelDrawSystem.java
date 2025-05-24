@@ -1,6 +1,6 @@
 package io.github.mwttg.nibbles.system;
 
-import io.github.mwttg.nibbles.Assets;
+import io.github.mwttg.nibbles.component.Assets;
 import io.github.mwttg.nibbles.Constants;
 import io.github.mwttg.nibbles.entity.LevelEntity;
 import java.util.List;

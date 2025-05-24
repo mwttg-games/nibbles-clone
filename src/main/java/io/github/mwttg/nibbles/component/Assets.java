@@ -1,4 +1,4 @@
-package io.github.mwttg.nibbles;
+package io.github.mwttg.nibbles.component;
 
 import io.github.mwttg.pixelartillery2d.graphic.*;
 import io.github.mwttg.pixelartillery2d.sound.Sound;
