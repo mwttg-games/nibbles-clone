@@ -11,12 +11,17 @@ public class AppleEntity {
   private boolean isCurrentAppleEaten;
 
   private AppleEntity() {
-    currentApple = 1;
+    currentApple = 0;
     isCurrentAppleEaten = true;
   }
 
   public static AppleEntity initialize() {
     return new AppleEntity();
+  }
+
+  public void reset() {
+    currentApple = 0;
+    isCurrentAppleEaten = true;
   }
 
   public Position getPosition() {

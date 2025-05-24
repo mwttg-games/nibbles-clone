@@ -28,7 +28,7 @@ public interface Constants {
   float SNAKE_TIME_TO_NEXT_MOVE = 0.15f;
 
   // APPLES
-  int MAX_APPLES = 10;
+  int MAX_APPLES = 2;
   float APPLES_Z_LAYER = -2.0f;
 
   // WALLS

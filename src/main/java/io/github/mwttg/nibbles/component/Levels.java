@@ -1,27 +1,23 @@
 package io.github.mwttg.nibbles.component;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-public final class Rooms {
+public interface Levels {
 
-  //    private final Map<Integer, WallsAndStartPosition> roomsById;
+  Map<Integer, WallsAndStartPosition> LEVEL_BY_ID =
+      Map.of(
+          1, level1(),
+          2, level2(),
+          3, level3(),
+          4, level4(),
+          5, level5(),
+          6, level6(),
+          7, level7(),
+          8, level8());
 
-  private Rooms() {
-    //        roomsById = new HashMap<>();
-    //        roomsById.put(1, level1());
-    //        roomsById.put(2, level2());
-  }
-
-  //    public static Rooms initialize() {
-  //        return new Rooms();
-  //    }
-
-  //    public Map<Integer, WallsAndStartPosition> getRoomsById() {
-  //        return roomsById;
-  //    }
-
-  public static WallsAndStartPosition level1() {
+  private static WallsAndStartPosition level1() {
     Set<Position> walls = new HashSet<>();
     for (int i = 12; i < 55; i++) {
       walls.add(new Position(i, 17));
@@ -29,7 +25,7 @@ public final class Rooms {
     return new WallsAndStartPosition(walls, new Position(32, 10));
   }
 
-  public static WallsAndStartPosition level2() {
+  private static WallsAndStartPosition level2() {
     Set<Position> walls = new HashSet<>();
     for (int i = 8; i < 28; i++) {
       walls.add(new Position(10, i));
@@ -38,7 +34,7 @@ public final class Rooms {
     return new WallsAndStartPosition(walls, new Position(32, 18));
   }
 
-  public static WallsAndStartPosition level3() {
+  private static WallsAndStartPosition level3() {
     Set<Position> walls = new HashSet<>();
     for (int i = 0; i < 30; i++) {
       walls.add(new Position(i + 1, 10));
@@ -51,7 +47,7 @@ public final class Rooms {
     return new WallsAndStartPosition(walls, new Position(32, 18));
   }
 
-  public static WallsAndStartPosition level4() {
+  private static WallsAndStartPosition level4() {
     Set<Position> walls = new HashSet<>();
     for (int i = 0; i < 41; i++) {
       walls.add(new Position(i + 12, 7));
@@ -64,7 +60,7 @@ public final class Rooms {
     return new WallsAndStartPosition(walls, new Position(32, 18));
   }
 
-  public static WallsAndStartPosition level5() {
+  private static WallsAndStartPosition level5() {
     Set<Position> walls = new HashSet<>();
     for (int i = 0; i < 31; i++) {
       walls.add(new Position(8, i));
@@ -78,7 +74,7 @@ public final class Rooms {
     return new WallsAndStartPosition(walls, new Position(36, 3));
   }
 
-  public static WallsAndStartPosition level6() {
+  private static WallsAndStartPosition level6() {
     Set<Position> walls = new HashSet<>();
     for (int i = 0; i < 36; i = i + 2) {
       walls.add(new Position(32, i));
@@ -86,7 +82,7 @@ public final class Rooms {
     return new WallsAndStartPosition(walls, new Position(36, 3));
   }
 
-  public static WallsAndStartPosition level7() {
+  private static WallsAndStartPosition level7() {
     Set<Position> walls = new HashSet<>();
     for (int i = 0; i < 28; i++) {
       walls.add(new Position(i + 4, i + 4));
@@ -95,7 +91,7 @@ public final class Rooms {
     return new WallsAndStartPosition(walls, new Position(36, 3));
   }
 
-  public static WallsAndStartPosition level8() {
+  private static WallsAndStartPosition level8() {
     Set<Position> walls = new HashSet<>();
     for (int i = 1; i < 35; i = i + 2) {
       walls.add(new Position(8, i));

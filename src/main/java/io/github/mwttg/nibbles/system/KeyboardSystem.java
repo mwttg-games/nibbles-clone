@@ -9,6 +9,10 @@ public final class KeyboardSystem {
 
   private KeyboardSystem() {}
 
+  public static void reset() {
+    PREVIOUS = Direction.LEFT;
+  }
+
   public static Direction getDirection(final long windowId) {
 
     if (GLFW.glfwGetKey(windowId, GLFW.GLFW_KEY_UP) == GLFW.GLFW_PRESS) {

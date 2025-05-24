@@ -26,6 +26,14 @@ public class SnakeEntity {
     return new SnakeEntity(x, y);
   }
 
+  public void reset(final Position startPosition) {
+    this.head = startPosition;
+    this.tail = List.of(new Position(startPosition.x() + 1, startPosition.y()));
+    this.isAlive = true;
+    this.direction = Direction.LEFT;
+    this.deltaTimeSinceLastMove = 0.0f;
+  }
+
   public Position getHead() {
     return head;
   }

@@ -35,6 +35,7 @@ public class GameLoop {
       ApplePlaceSystem.placeApple(appleEntity, levelEntity);
       AppleEatSystem.eatApple(snakeEntity, appleEntity);
       SnakeMoveSystem.move(snakeEntity, direction, deltaTime);
+      LevelChangeSystem.changeLevel(snakeEntity, levelEntity, appleEntity);
 
       // render
       GL41.glClear(GL41.GL_COLOR_BUFFER_BIT | GL41.GL_DEPTH_BUFFER_BIT);

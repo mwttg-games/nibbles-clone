@@ -1,8 +1,8 @@
 package io.github.mwttg.nibbles.entity;
 
 import io.github.mwttg.nibbles.Constants;
+import io.github.mwttg.nibbles.component.Levels;
 import io.github.mwttg.nibbles.component.Position;
-import io.github.mwttg.nibbles.component.Rooms;
 import java.util.List;
 import java.util.Set;
 import org.joml.Matrix4f;
@@ -10,13 +10,24 @@ import org.joml.Matrix4f;
 public class LevelEntity {
 
   private Set<Position> walls;
+  private int currentLevel;
 
-  private LevelEntity(final Set<Position> walls) {
-    this.walls = walls;
+  private LevelEntity() {
+    this.currentLevel = 1;
+    this.walls = Levels.LEVEL_BY_ID.get(currentLevel).walls();
   }
 
   public static LevelEntity initialize() {
-    return new LevelEntity(Rooms.level1().walls());
+    return new LevelEntity();
+  }
+
+  public void nextLevel() {
+    currentLevel = currentLevel + 1;
+    walls = Levels.LEVEL_BY_ID.get(currentLevel).walls();
+  }
+
+  public Position getSnakeStartPosition() {
+    return Levels.LEVEL_BY_ID.get(currentLevel).start();
   }
 
   public Set<Position> getWalls() {
