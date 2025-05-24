@@ -21,6 +21,7 @@
         <spotless.version>2.44.2</spotless.version>
         <google.code.format.version>1.25.2</google.code.format.version>
         <maven.jar.plugin.version>3.4.2</maven.jar.plugin.version>
+        <maven.native.plugin.version>0.10.6</maven.native.plugin.version>
     </properties>
 
     <dependencies>
@@ -44,7 +45,24 @@
     <build>
         <plugins>
             <plugin>
-                <!-- Build an executable JAR -->
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <version>${maven.native.plugin.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>build-native</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven.jar.plugin.version}</version>
