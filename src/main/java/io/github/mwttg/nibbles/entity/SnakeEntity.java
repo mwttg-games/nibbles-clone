@@ -60,8 +60,8 @@ public class SnakeEntity {
     this.tail = tail;
   }
 
-  public boolean isAlive() {
-    return isAlive;
+  public boolean isDead() {
+    return !isAlive;
   }
 
   public void setAlive(boolean alive) {

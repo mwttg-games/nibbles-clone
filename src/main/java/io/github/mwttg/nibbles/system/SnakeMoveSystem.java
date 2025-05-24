@@ -17,7 +17,7 @@ public final class SnakeMoveSystem {
     snakeEntity.addDeltaTime(deltaTime);
     final float deltaTimeSinceLastMove = snakeEntity.getDeltaTimeSinceLastMove();
 
-    if (!snakeEntity.isAlive()) {
+    if (snakeEntity.isDead()) {
       return;
     }
 

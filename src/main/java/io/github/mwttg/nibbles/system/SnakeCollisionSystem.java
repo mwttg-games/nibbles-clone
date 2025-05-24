@@ -26,7 +26,7 @@ public final class SnakeCollisionSystem {
       return;
     }
 
-    if (!snakeEntity.isAlive()) {
+    if (snakeEntity.isDead()) {
       return;
     }
 
