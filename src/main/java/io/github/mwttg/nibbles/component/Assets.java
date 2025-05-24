@@ -37,9 +37,12 @@ public class Assets {
   private Assets() {
     LOG.info("Load Game Assets...");
 
-    this.shaderId = ShaderProgram.createDefaultShader();
+    this.shaderId =
+        ShaderProgram.createFrom("./data/shaders/vertex.glsl", "./data/shaders/fragment.glsl");
     this.uniform = Uniform.create(shaderId);
-    this.instancedShaderId = ShaderProgram.createDefaultInstancedShader();
+    this.instancedShaderId =
+        ShaderProgram.createFrom(
+            "./data/shaders/vertex-instanced.glsl", "./data/shaders/fragment.glsl");
     this.instancedUniform = InstancedUniform.create(instancedShaderId);
 
     this.spriteBackground = StaticSprite.create(64, 36, "./data/sprites/background.png");
