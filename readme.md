@@ -31,6 +31,10 @@ If you want to play the original Nibbles, you can try the following link:
 | M           | Mute Sound          |
 | S           | Sound on            |
 
+## Screenshot
+
+![Screenshot](screenshot.png "Level 1")
+
 
 ## Links
 
