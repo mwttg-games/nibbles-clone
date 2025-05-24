@@ -20,6 +20,7 @@
         <!-- plugin versions -->
         <spotless.version>2.44.2</spotless.version>
         <google.code.format.version>1.25.2</google.code.format.version>
+        <maven.jar.plugin.version>3.4.2</maven.jar.plugin.version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,21 @@
 
     <build>
         <plugins>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>io.github.mwttg.nibbles.Nibbles</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
