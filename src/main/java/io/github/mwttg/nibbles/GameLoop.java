@@ -33,7 +33,7 @@ public class GameLoop {
       final Direction direction = KeyboardSystem.getDirection(windowId);
 
       SnakeCollisionSystem.checkCollision(snakeEntity, levelEntity);
-      ApplePlaceSystem.placeApple(appleEntity, levelEntity);
+      ApplePlaceSystem.placeApple(appleEntity, levelEntity, snakeEntity);
       AppleEatSystem.eatApple(snakeEntity, appleEntity);
       SnakeMoveSystem.move(snakeEntity, direction, deltaTime);
       LevelChangeSystem.changeLevel(snakeEntity, levelEntity, appleEntity);
