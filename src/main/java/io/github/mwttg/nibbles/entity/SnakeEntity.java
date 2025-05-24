@@ -16,7 +16,7 @@ public class SnakeEntity {
 
   private SnakeEntity(final int x, final int y) {
     this.head = new Position(x, y);
-    this.tail = List.of(new Position(x + 1, y));
+    this.tail = List.of(new Position(x + 1, y), new Position(x + 2, y));
     this.isAlive = true;
     this.direction = Direction.LEFT;
     this.deltaTimeSinceLastMove = 0.0f;
@@ -28,7 +28,10 @@ public class SnakeEntity {
 
   public void reset(final Position startPosition) {
     this.head = startPosition;
-    this.tail = List.of(new Position(startPosition.x() + 1, startPosition.y()));
+    this.tail =
+        List.of(
+            new Position(startPosition.x() + 1, startPosition.y()),
+            new Position(startPosition.x() + 2, startPosition.y()));
     this.isAlive = true;
     this.direction = Direction.LEFT;
     this.deltaTimeSinceLastMove = 0.0f;
