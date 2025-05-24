@@ -1,3 +1,5 @@
+[![Build Pipeline](https://github.com/mwttg-games/nibbles-clone/actions/workflows/build.yml/badge.svg)](https://github.com/mwttg-games/nibbles-clone/actions/workflows/build.yml)
+
 # NIBBLES clone
 
 Can anyone remember [MS-DOS][msdos], [Q-Basic][qbasic] and/or [Turbo Pascal][pascal]?
