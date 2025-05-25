@@ -35,4 +35,4 @@ jobs:
       - name: Make Executable
         run: chmod +x butler
       - name: Test Ls
-        run: ls -lha
+        run: ls
