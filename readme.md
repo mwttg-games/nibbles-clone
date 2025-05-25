@@ -1,4 +1,6 @@
 [![Build Pipeline](https://github.com/mwttg-games/nibbles-clone/actions/workflows/build.yml/badge.svg)](https://github.com/mwttg-games/nibbles-clone/actions/workflows/build.yml)
+[![Release Version](https://img.shields.io/github/v/release/mwttg-games/nibbles-clone)](https://github.com/mwttg-games/nibbles-clone/releases)
+
 
 # NIBBLES clone
 
