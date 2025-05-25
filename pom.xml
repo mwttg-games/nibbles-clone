@@ -102,6 +102,9 @@
                         </executions>
                         <configuration>
                             <imageName>nibbles-clone</imageName>
+                            <buildArgs>
+                                <buildArg>-march=compatibility</buildArg>
+                            </buildArgs>
                         </configuration>
                     </plugin>
                     <plugin>
