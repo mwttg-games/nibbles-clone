@@ -1,0 +1,38 @@
+name: Release Windows x64
+
+on:
+  workflow_dispatch:
+    inputs:
+      git-tag:
+        description: 'The git tag which which is used for the release'
+        required: true
+        default: 1.0.0
+
+jobs:
+  release-windows_x64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Fetch Git Tags
+        run: git fetch --all --tags --prune
+      - name: Git Checkout Tag
+        run:  git checkout tags/${{github.event.inputs.git-tag}} -b release/${{github.event.inputs.git-tag}}
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'oracle'
+          architecture: x64
+      - name: Maven Build
+        run: mvn clean install
+      - name: Download itch.io Butler
+        run: curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+      - name: Unzip itch.io Butler
+        run: unzip butler.zip
+      - name: Make Executable
+        run: chmod +x butler
+      - name: Test Ls
+        run: ls -lha
