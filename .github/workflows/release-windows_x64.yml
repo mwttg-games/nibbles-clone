@@ -6,11 +6,11 @@ on:
       git-tag:
         description: 'The git tag which which is used for the release'
         required: true
-        default: 1.0.0
+        default: 1.0.2
 
 jobs:
   release-windows_x64:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,20 +28,24 @@ jobs:
       - name: Maven Build
         run: mvn clean install -Pnative
       - name: Download itch.io Butler
-        run: curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+        run: curl -L -o butler.zip https://broth.itch.ovh/butler/windows-amd64/LATEST/archive/default
       - name: Unzip itch.io Butler
         run: unzip butler.zip
       - name: Make Executable
         run: chmod +x butler
+      - name: list directory
+        run: dir
       - name: Create release Folder
         run: mkdir nibbles-clone-v${{github.event.inputs.git-tag}}
+      - name: Create data Folder
+        run: mkdir nibbles-clone-v${{github.event.inputs.git-tag}}\data
       - name: Copy Assets to release Folder
-        run: Copy-Item -Path "D:\a\nibbles-clone\nibbles-clone\data\*" -Destination "D:\a\nibbles-clone\nibbles-clone\nibbles-clone-v${{github.event.inputs.git-tag}}" -Recurse
+        run: Copy-Item -Path "D:\a\nibbles-clone\nibbles-clone\data\*" -Destination "D:\a\nibbles-clone\nibbles-clone\nibbles-clone-v${{github.event.inputs.git-tag}}\data" -Recurse
       - name: Copy Binaries to release Folder
         run: Copy-Item "D:\a\nibbles-clone\nibbles-clone\target\nibbles-clone.exe" -Destination "D:\a\nibbles-clone\nibbles-clone\nibbles-clone-v${{github.event.inputs.git-tag}}"
       - name: Zip release folder
-        run: Compress-Archive -Path "D:\a\nibbles-clone\nibbles-clone\nibbles-clone-v${{github.event.inputs.git-tag}}" -Destination ""D:\a\nibbles-clone\nibbles-clone\nipples-cone-v${{github.event.inputs.git-tag}}.zip"
-      - name: Test Ls
-        run: ls
-      - name: l2
-        run: ls .\nibbles-clone-v${{github.event.inputs.git-tag}}\
+        run: Compress-Archive -Path "D:\a\nibbles-clone\nibbles-clone\nibbles-clone-v${{github.event.inputs.git-tag}}" -Destination "D:\a\nibbles-clone\nibbles-clone\nipples-clone-v${{github.event.inputs.git-tag}}.zip"
+      - name: Deploy to itch.io
+        env:
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+        run: .\butler.exe push nipples-clone-v${{github.event.inputs.git-tag}}.zip mwttg/nibbles-clone:win --userversion ${{github.event.inputs.git-tag}}
