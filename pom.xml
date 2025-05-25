@@ -101,7 +101,7 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <imageName>nibble-${project.version}</imageName>
+                            <imageName>nibbles-clone</imageName>
                         </configuration>
                     </plugin>
                     <plugin>
