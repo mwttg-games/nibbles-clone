@@ -1,0 +1,49 @@
+name: Release MacOS x64 Version to itch.io
+
+on:
+  workflow_dispatch:
+    inputs:
+      git-tag:
+        description: 'The git tag which which is used for the release'
+        required: true
+        default: 1.0.2
+
+jobs:
+  release-macos_x64:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Fetch Git Tags
+        run: git fetch --all --tags --prune
+      - name: Git Checkout Tag
+        run:  git checkout tags/${{github.event.inputs.git-tag}} -b release/${{github.event.inputs.git-tag}}
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Maven Build
+        run: mvn clean install -Pnative
+      - name: Download itch.io Butler
+        run: curl -L -o butler.zip https://broth.itch.ovh/butler/darwin-amd64/LATEST/archive/default
+      - name: Unzip itch.io Butler
+        run: unzip butler.zip
+      - name: Make Executable
+        run: chmod +x butler
+      - name: Create release Folder
+        run: mkdir nibbles-clone-v${{github.event.inputs.git-tag}}
+      - name: Create data Folder
+        run: mkdir nibbles-clone-v${{github.event.inputs.git-tag}}/data
+      - name: Copy Assets to release Folder
+        run: cp -R data/ nibbles-clone-v${{github.event.inputs.git-tag}}/data
+      - name: Copy Binaries to release Folder
+        run: cp target/nibbles-clone nibbles-clone-v${{github.event.inputs.git-tag}}
+      - name: Zip release folder
+        run: tar -czf nibbles-clone-v${{github.event.inputs.git-tag}}.tar.gz nibbles-clone-v${{github.event.inputs.git-tag}}
+      - name: Deploy to itch.io
+        env:
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+        run: ./butler push nibbles-clone-v${{github.event.inputs.git-tag}}.tar.gz mwttg/nibbles-clone:macos --userversion ${{github.event.inputs.git-tag}}
