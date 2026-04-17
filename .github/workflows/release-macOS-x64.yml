@@ -10,7 +10,7 @@ on:
 
 jobs:
   release-macos_x64:
-    runs-on: macos-13
+    runs-on: macos-26-intel
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,7 +38,7 @@ jobs:
       - name: Create data Folder
         run: mkdir nibbles-clone-v${{github.event.inputs.git-tag}}/data
       - name: Copy Assets to release Folder
-        run: cp -R data/ nibbles-clone-v${{github.event.inputs.git-tag}}/data
+        run: cp -R data/* nibbles-clone-v${{github.event.inputs.git-tag}}/data
       - name: Copy Binaries to release Folder
         run: cp target/nibbles-clone nibbles-clone-v${{github.event.inputs.git-tag}}
       - name: Zip release folder
